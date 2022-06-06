@@ -1,0 +1,68 @@
+body {
+  background-color: rgba(164, 164, 164, 0.45);
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.left-container {
+  z-index: 1;
+  position: fixed;
+  top: 5%;
+  left: 0;
+  margin-left: 10%;
+  height: 90%;
+  width: 48%;
+
+  border: 1px solid rgba(80, 0, 128, 0.15);
+  background: linear-gradient(
+    135deg,
+    rgba(80, 0, 128, 0.35),
+    rgba(80, 0, 128, 0.85)
+  );
+
+  --mask: linear-gradient(#000 0 0) left/calc(100% - 200px) 100% no-repeat,
+    conic-gradient(from -155deg at right, #0000, #000 1deg 129deg, #0000 130deg)
+      right/200px 857.8px repeat-y;
+  -webkit-mask: var(--mask);
+  mask: var(--mask);
+}
+
+.right-container {
+  z-index: 0;
+  position: fixed;
+  top: 5%;
+  right: 0;
+  margin-right: 10%;
+  height: 90%;
+  width: 48%;
+
+  border: 1px solid rgba(0, 64, 128, 0.15);
+  background: linear-gradient(
+    135deg,
+    rgba(0, 64, 128, 0.25),
+    rgba(0, 64, 128, 0.85)
+  );
+}
+
+.image-display-block {
+  margin: 20px;
+  width: 55%;
+  height: 55%;
+
+  background: linear-gradient(135deg, rgba(1, 1, 1, 0.1), rgba(1, 1, 1, 0.15));
+  border-radius: 20px;
+}
+
+.result-block {
+  position: absolute;
+  right: 0;
+  margin: 20px;
+  width: 55%;
+  height: 55%;
+
+  background: linear-gradient(135deg, rgba(1, 1, 1, 0.1), rgba(1, 1, 1, 0.15));
+  border-radius: 20px;
+}
