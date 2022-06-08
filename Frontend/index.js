@@ -1,4 +1,3 @@
-"use strict";
 let imageContent = document.querySelector('.image-display-block');
 let imageInput = document.querySelector('.image-input');
 let innerText = document.querySelector('.inner');
@@ -67,3 +66,4 @@ function drop(e) {
     }
 }
 console.log(imageContent.getElementsByTagName("img").length);
+//# sourceMappingURL=index.js.map

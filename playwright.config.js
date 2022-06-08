@@ -1,4 +1,6 @@
-import { devices } from '@playwright/test';
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const test_1 = require("@playwright/test");
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
@@ -41,21 +43,15 @@ const config = {
     projects: [
         {
             name: 'chromium',
-            use: {
-                ...devices['Desktop Chrome'],
-            },
+            use: Object.assign({}, test_1.devices['Desktop Chrome']),
         },
         {
             name: 'firefox',
-            use: {
-                ...devices['Desktop Firefox'],
-            },
+            use: Object.assign({}, test_1.devices['Desktop Firefox']),
         },
         {
             name: 'webkit',
-            use: {
-                ...devices['Desktop Safari'],
-            },
+            use: Object.assign({}, test_1.devices['Desktop Safari']),
         },
         /* Test against mobile viewports. */
         // {
@@ -92,4 +88,4 @@ const config = {
     //   port: 3000,
     // },
 };
-export default config;
+exports.default = config;
