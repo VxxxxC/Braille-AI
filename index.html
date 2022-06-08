@@ -11,10 +11,15 @@
     <div class="container">
       <div class="left-container">
         <div class="image-display-block">
-          <div class="image-content"></div>
+          <form action="/upload" method="POST" class="dragover">
+            <div class="inner">Drag and Drop 
+              <div>or Press to upload image</></div>
+            </div>
+            <input type="file" style="margin: 15px" class="image-input" accept="image"/>
         </div>
 
-        <input type="file" style="margin: 15px" class="image-input"/>
+        <button type="button" class="submit">Upload</button>
+      </form>
       </div>
 
       <div class="right-container">
@@ -24,4 +29,5 @@
       </div>
     </div>
   </body>
+  <script src="/index.js"></script>
 </html>

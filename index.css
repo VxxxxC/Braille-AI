@@ -12,6 +12,7 @@ body {
 }
 
 .left-container {
+  display: block;
   z-index: 1;
   position: fixed;
   top: 15%;
@@ -56,6 +57,13 @@ body {
 
   background: linear-gradient(135deg, rgba(1, 1, 1, 0.1), rgba(1, 1, 1, 0.15));
   border-radius: 20px;
+  border: 2px dashed rgb(255, 255, 255);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
 }
 
 .result-content {
@@ -69,6 +77,34 @@ body {
   border-radius: 20px;
 }
 
+.inner {
+  margin: 5px;
+  padding: 10px;
+  font-family: arial, sans-serif;
+  font-size: 18px;
+
+  color: rgb(25, 52, 79);
+
+  text-align: center;
+}
+
+.submit {
+  margin-left: 60px;
+  margin-top: 30px;
+
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  width: 35%;
+  height: 50px;
+  color: rgb(255, 254, 254);
+  background: rgba(41, 148, 255, 0.85);
+  padding: 5px 10px;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+input {
+  display: none;
+}
 /* @media screen and (min-width: 200px) and (max-width: 500px){
 
 } */
