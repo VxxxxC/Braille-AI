@@ -1,4 +1,4 @@
-image node:latest
+image: node:latest
 
 stages:
   - testing
@@ -7,24 +7,24 @@ variables:
 POSTGRES_DB:
 POSTGRES_USER:
 POSTGRES_PASSWORD:
-POSTGRES_HOST: 
+POSTGRES_HOST:
 
 testing:
-services:
-  - postgres:latest
+  services:
+    - postgres:latest
 
-before_script:
-  - yarn install
-  - yarn knex migrate:latest --env testing
+  before_script:
+    - yarn install
+    - yarn knex migrate:latest --env testing
 
-stage: testing
+  stage: testing
 
-script:
-  - yarn jest
+  script:
+    - yarn jest
 
 deploy:
   before_script:
-    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    - "which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )"
     - eval $(ssh-agent -s)
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > private.pem
     - chmod 400 private.pem
@@ -35,9 +35,9 @@ deploy:
     - chmod 644 ~/.ssh/known_hosts
   stage: deploy
   script:
-    - ssh ubuntu@vxxxxc 
-        "cd Tecky_C20TW_BAD_Project;
-          git pull origin main;
-          yarn install;
-          yarn knex migrate:latest;
-          forever restart index.js;"
+    - ssh ubuntu@vxxxxc
+      "cd Tecky_C20TW_BAD_Project;
+      git pull origin main;
+      yarn install;
+      yarn knex migrate:latest;
+      forever restart index.js;"
