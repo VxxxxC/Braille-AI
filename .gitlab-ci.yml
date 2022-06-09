@@ -1,7 +1,7 @@
 image: node:latest
 
 stages:
-  - deploy
+  - testing
 
 variables:
   POSTGRES_DB: braille
@@ -9,21 +9,32 @@ variables:
   POSTGRES_PASSWORD: CICD
   POSTGRES_HOST: postgres
 
-deploy:
-  before_script:
-    - "which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )"
-    - eval $(ssh-agent -s)
-    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > private.pem
-    - chmod 400 private.pem
-    - ssh-add private.pem > /dev/null
-    - mkdir -p ~/.ssh
-    - chmod 700 ~/.ssh
-    - ssh-keyscan -H  vxxxxc > ~/.ssh/known_hosts
-    - chmod 644 ~/.ssh/known_hosts
-  stage: deploy
-  script:
-    - ssh ubuntu@vxxxxc
-      "cd Tecky_C20TW_BAD_Project;
-      git pull origin main;
-      yarn install;
-      yarn knex migrate:latest;"
+  deploy:
+    before_script:
+      - "which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )"
+      - eval $(ssh-agent -s)
+      - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > private.pem
+      - chmod 400 private.pem
+      - ssh-add private.pem > /dev/null
+      - mkdir -p ~/.ssh
+      - chmod 700 ~/.ssh
+      - ssh-keyscan -H  vxxxxc > ~/.ssh/known_hosts
+      - chmod 644 ~/.ssh/known_hosts
+    stage: deploy
+    script:
+      - ssh ubuntu@vxxxxc
+        "cd Tecky_C20TW_BAD_Project;
+        git pull origin main;
+        yarn install;
+        yarn knex migrate:latest;"
+
+  testing:
+    services:
+      - postgres:latest
+
+    before_script:
+      - yarn install
+      - yarn knex migrate:latest --env test
+    stage: testing
+    script:
+      - yarn jest

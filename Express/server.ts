@@ -36,16 +36,23 @@ server.listen(PORT, () => {
 })
 
 
-app.use(express.static("public"))
+app.use(express.static("public"));
+app.use(express.json());
+
+// app.get('/', (req, res) => {
+//     res.json("Hello!")
+// })
+
 // app.use('/uploads', express.static(uploadDir))
 
-
-// app.post('api',async(req,res)=>{
-//     let file  = req.body
-//    let response = await fetch('http://localhost:5000',
-//     {method:'POST'},
-//     {body:JSON.stringify(file)})
-//     let result = await response.json()
-//     res.json({result})
-// })
+app.post('api', async (req, res) => {
+    let file = req.body
+    let response = await fetch('http://localhost:5000',
+        {
+            method: 'POST',
+            body: JSON.stringify(file)
+        })
+    let result = await response.json()
+    res.json({ result })
+})
 

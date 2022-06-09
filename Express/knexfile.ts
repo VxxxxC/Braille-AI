@@ -3,7 +3,7 @@ import { env } from './env'
 
 // Update with your config settings.
 
-const config: { [key: string]: Knex.Config } = {
+export const config: { [key: string]: Knex.Config } = {
   development: {
     client: "postgresql",
     connection: {
@@ -20,7 +20,7 @@ const config: { [key: string]: Knex.Config } = {
     }
   },
 
-  staging: {
+  test: {
     client: "postgresql",
     connection: {
       database: env.DB_NAME,
