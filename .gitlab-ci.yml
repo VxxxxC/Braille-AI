@@ -8,7 +8,7 @@ variables:
   POSTGRES_DB:  braille
   POSTGRES_USER: CICD
   POSTGRES_PASSWORD: CICD
-  # POSTGRES_HOST:
+  POSTGRES_HOST: postgres
 
 testing:
   # services:

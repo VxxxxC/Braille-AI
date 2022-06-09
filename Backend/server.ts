@@ -36,7 +36,7 @@ server.listen(PORT, () => {
 })
 
 
-// app.use(express.static("public"))
+app.use(express.static("public"))
 // app.use('/uploads', express.static(uploadDir))
 
 
