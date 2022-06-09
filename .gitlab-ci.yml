@@ -26,5 +26,4 @@ deploy:
       "cd Tecky_C20TW_BAD_Project;
       git pull origin main;
       yarn install;
-      yarn knex migrate:latest;
-      forever restart index.js;"
+      yarn knex migrate:latest;"
