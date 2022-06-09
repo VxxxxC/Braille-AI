@@ -1,17 +1,18 @@
 image: node:latest
 
 stages:
-  - testing
+  # - testing
+  - deploy
 
 variables:
-POSTGRES_DB:
-POSTGRES_USER:
-POSTGRES_PASSWORD:
-POSTGRES_HOST:
+  POSTGRES_DB:  braille
+  POSTGRES_USER: CICD
+  POSTGRES_PASSWORD: CICD
+  # POSTGRES_HOST:
 
 testing:
-  services:
-    - postgres:latest
+  # services:
+  #   - postgres:latest
 
   before_script:
     - yarn install
