@@ -1,27 +1,13 @@
 image: node:latest
 
 stages:
-  # - testing
   - deploy
 
 variables:
-  POSTGRES_DB:  braille
+  POSTGRES_DB: braille
   POSTGRES_USER: CICD
   POSTGRES_PASSWORD: CICD
   POSTGRES_HOST: postgres
-
-testing:
-  # services:
-  #   - postgres:latest
-
-  before_script:
-    - yarn install
-    - yarn knex migrate:latest --env testing
-
-  stage: testing
-
-  script:
-    - yarn jest
 
 deploy:
   before_script:
