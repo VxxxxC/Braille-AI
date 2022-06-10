@@ -4,6 +4,7 @@ import { print } from 'listening-on'
 import { client } from './db'
 import http from 'http'
 import { Server as ServerIO } from 'socket.io';
+import fetch from 'node-fetch';
 
 const app = express();
 const PORT = env.PORT;
@@ -39,20 +40,22 @@ server.listen(PORT, () => {
 app.use(express.static("public"));
 app.use(express.json());
 
-// app.get('/', (req, res) => {
-//     res.json("Hello!")
-// })
+app.get('/', (req, res) => {
+    res.json("Hello World by Express")
+})
 
 // app.use('/uploads', express.static(uploadDir))
 
-app.post('api', async (req, res) => {
+app.post('/api', async (req, res) => {
+    console.log(req.body)
     let file = req.body
-    let response = await fetch('http://localhost:5000',
+    let response = await fetch('http://localhost:5000/api',
         {
             method: 'POST',
             body: JSON.stringify(file)
         })
     let result = await response.json()
+    console.log(result)
     res.json({ result })
 })
 
