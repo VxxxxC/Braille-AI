@@ -15,6 +15,7 @@ imageInput?.addEventListener('change', (event) => {
         image.style.objectFit = 'contain';
         innerText.remove();
         imageContent.appendChild(image);
+        console.log(imageInput.files[0]);
     }
     else {
         let image = document.querySelector('img');
@@ -25,6 +26,7 @@ imageInput?.addEventListener('change', (event) => {
         newImage.style.objectFit = 'contain';
         image.remove();
         imageContent.appendChild(newImage);
+        console.log(imageInput.files[0]);
     }
 });
 //-----------drag and drop input-----------------------
@@ -53,6 +55,7 @@ function drop(e) {
         image.style.objectFit = 'contain';
         innerText.remove();
         imageContent.appendChild(image);
+        console.log(imageInput.files[0]);
     }
     else {
         let image = document.querySelector('img');
@@ -63,7 +66,19 @@ function drop(e) {
         newImage.style.objectFit = 'contain';
         image.remove();
         imageContent.appendChild(newImage);
+        console.log(imageInput.files[0]);
     }
 }
 console.log(imageContent.getElementsByTagName("img").length);
+let submit = document.querySelector("button.submit");
+submit.addEventListener('click', async (event) => {
+    event.preventDefault();
+    let formData = new FormData();
+    formData.append("image", imageInput.files[0]);
+    await fetch("/upload", {
+        method: "POST",
+        body: formData
+    });
+    console.log("Sending image...");
+});
 //# sourceMappingURL=index.js.map
