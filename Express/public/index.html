@@ -1,33 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="/index.css" />
-    <title>Braille Recognition Machine</title>
-  </head>
-  <body>
-    <div class="container">
-      <div class="left-container">
-        <div class="image-display-block">
-          <form action="/upload" method="POST" class="dragover">
-            <div class="inner">Drag and Drop 
-              <div>or Press to upload image</></div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Import TensorFlow.js library -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js" type="text/javascript"></script>
+
+
+  <link rel="stylesheet" type="text/css" href="/index.css" />
+  <title>Braille Recognition Machine</title>
+</head>
+
+<body>
+  <div class="background">
+    <div class="left-container">
+      <div class="image-display-block">
+        <form action="/upload" method="POST" class="dragover">
+          <div class="inner">Drag and Drop
+            <div>or Press to upload image</>
             </div>
-            <input type="file" style="margin: 15px" class="image-input" accept="image/*"/>
-        </div>
+          </div>
+          <input type="file" style="margin: 15px" class="image-input" accept="image/*" />
 
-        <button type="button" class="submit">Upload</button>
-      </form>
+        </form>
       </div>
+      <button type="button" class="submit">Upload</button>
+    </div>
 
-      <div class="right-container">
-        <div class="result-block">
-          <div class="result-content"></div>
-        </div>
+    <div class="indicator">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div class="right-container">
+      <div class="result-block">
+        <div class="result-content"></div>
       </div>
     </div>
-  </body>
-  <script src="/index.js"></script>
+
+  </div>
+</body>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/index.js"></script>
+
 </html>

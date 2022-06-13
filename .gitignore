@@ -1,7 +1,9 @@
+.env
 node_modules/
+myenv/
 /test-results/
 /playwright-report/
 /playwright/.cache/
-.env
 yolov5/
-
+tensorflow/
+upload/

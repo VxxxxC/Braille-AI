@@ -17,7 +17,8 @@ export const config: { [key: string]: Knex.Config } = {
     },
     migrations: {
       tableName: "knex_migrations"
-    }
+    },
+    useNullAsDefault: true
   },
 
   test: {
@@ -33,7 +34,8 @@ export const config: { [key: string]: Knex.Config } = {
     },
     migrations: {
       tableName: "knex_migrations"
-    }
+    },
+    useNullAsDefault: true
   },
 
   production: {
@@ -49,7 +51,8 @@ export const config: { [key: string]: Knex.Config } = {
     },
     migrations: {
       tableName: "knex_migrations"
-    }
+    },
+    useNullAsDefault: true
   }
 
 };

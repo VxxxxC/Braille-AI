@@ -17,4 +17,4 @@ def express_api(request):
 
 # app.run must be at the bottom , otherwise cannot start the server
 if __name__ == "__main__":
-    app.run(host="localhost", port=5000, debug=True, dev=True)
+    app.run(host="localhost", port=5000)

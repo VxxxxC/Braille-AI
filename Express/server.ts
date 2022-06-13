@@ -6,6 +6,7 @@ import http from 'http'
 import { Server as ServerIO } from 'socket.io';
 import fetch from 'node-fetch';
 import formidable from 'formidable';
+// import knex from 'knex';
 import fs from "fs"
 
 const app = express();
@@ -27,11 +28,12 @@ const io = new ServerIO(server)
 io.on('connection', (socket) => {
     console.log(`client socket connected by ID : ${socket.id}`)
 
-    socket.emit('toClient', 'frontend user connected to server')
-    socket.on('toServer', (msg) => {
+    socket.emit('toClient', 'socketIO connected !! Express server listening...')
+    socket.on('toExpress', (msg) => {
         console.log(msg)
     })
 })
+
 
 server.listen(PORT, () => {
     print(PORT)
@@ -79,16 +81,37 @@ app.post('/api', async (req, res) => {
 app.post('/upload', async (req, res) => {
     // console.log(req)
 
-    const form = formidable()
+    const form = formidable({
+        uploadDir,
+        keepExtensions: true,
+        allowEmptyFiles: false,
+        maxFiles: 1,
+        maxFileSize: 1024 * 1024 ** 2,
+        filter: file => file.mimetype?.startsWith('image/') || false,
+    })
 
     form.parse(req, async (err, fields, files: any) => {
         if (err) {
             console.error({ err })
             return;
         }
-        console.log(files)
+        // console.log(files)
         const submitImage = files.image.newFilename
         console.log(submitImage)
+
+
+        // await knex("images")
+        //     .insert({
+        //         image: submitImage,
+        //         uploaded_date: "now()"
+        //     })
+        //     .returning("id")
+        //     .then((res) => {
+        //         let result = res
+        //         let id = result[0].id
+        //         console.log(`image ID is : ${id}`)
+        //     })
+
 
         let response = await fetch('http://localhost:5000/api', {
             method: 'POST',
@@ -98,3 +121,7 @@ app.post('/upload', async (req, res) => {
         res.json(result)
     })
 })
+
+// app.get('/post', async (req, res) => {
+
+// })
