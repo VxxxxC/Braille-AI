@@ -16,18 +16,29 @@
 
 <body>
   <div class="background">
-    <div class="left-container">
-      <div class="image-display-block">
-        <form action="/upload" method="POST" class="dragover">
-          <div class="inner">Drag and Drop
-            <div>or Press to upload image</>
-            </div>
-          </div>
-          <input type="file" style="margin: 15px" class="image-input" accept="image/*" />
+    <div class="nav-bar">
+      <button type="button" class="file">Upload File</button>
+      <button type="button" class="cam">Camera</button>
 
-        </form>
+      <div class="left-container">
+        <div class="image-display-block">
+          <form action="/upload" method="POST" class="dragover">
+            <div class="inner">Drag and Drop
+              <div>or Press to upload image</>
+              </div>
+            </div>
+            <input type="file" style="margin: 15px" class="image-input" accept="image/*" />
+
+          </form>
+        </div>
+        <button type="button" class="submit">Upload</button>
+
+        <div class="camera-display-block" style="display:none">
+          <div class="inner">Camera Zone</div>
+        </div>
+
       </div>
-      <button type="button" class="submit">Upload</button>
+
     </div>
 
     <div class="indicator">

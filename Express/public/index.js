@@ -13,6 +13,7 @@ socket.emit("toExpress", "socketIO is on !! index page listening...");
 
 //------------------------------------------------
 let imageContent = document.querySelector(".image-display-block");
+let cameraContent = document.querySelector(".camera-display-block");
 let imageInput = document.querySelector(".image-input");
 let innerText = document.querySelector(".inner");
 let image;
@@ -103,3 +104,18 @@ let content = document.querySelector(".result-content");
 // response.then((res) => {
 //   console.log(res);
 // });
+
+let fileButton = document.querySelector(".file");
+let camButton = document.querySelector(".cam");
+
+fileButton.addEventListener("click", () => {
+  cameraContent.style.display = "none";
+  imageContent.style.display = "inline-block";
+  submit.style.display = "inline-block";
+});
+
+camButton.addEventListener("click", () => {
+  cameraContent.style.display = "inline-block";
+  imageContent.style.display = "none";
+  submit.style.display = "none";
+});
