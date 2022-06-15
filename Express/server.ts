@@ -1,7 +1,7 @@
 import express from "express"
-import { env } from './Express/env'
+import { env } from './env'
 import { print } from 'listening-on'
-import { client } from './Express/db'
+import { client } from './db'
 import http from 'http'
 import { Server as ServerIO } from 'socket.io';
 import fetch from 'node-fetch';

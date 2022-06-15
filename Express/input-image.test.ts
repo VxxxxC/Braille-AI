@@ -4,14 +4,10 @@ import { seed as deleteImage } from './seeds/delete-image'
 
 describe('database test', () => {
 
-   test('image input', () => {
+   test('image input', async() => {
 
 
-      let resA = deleteImage
-      console.log(resA)
-
-
-      let resB = inputImage
-      console.log(resB)
+      await inputImage()
+      await deleteImage()
    })
 })

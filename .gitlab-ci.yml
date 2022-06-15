@@ -21,7 +21,7 @@ variables:
       - yarn knex migrate:latest --env test
     stage: testing
     script:
-      - yarn jest
+      - yarn knex seed:run test
 
 
   #  build:
