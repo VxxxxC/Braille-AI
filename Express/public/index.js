@@ -14,19 +14,21 @@ socket.emit("toExpress", "socketIO is on !! index page listening...");
 //------------------------------------------------
 let imageContent = document.querySelector(".image-display-block");
 let cameraContent = document.querySelector(".camera-display-block");
+let content = document.querySelector(".result-content");
 let imageInput = document.querySelector(".image-input");
 let innerText = document.querySelector(".inner");
 let image;
 let newImage;
 
-imageContent?.addEventListener("click", () => imageInput?.click());
+imageContent.addEventListener("click", () => imageInput.click());
 
 //-----------on click input----------------------
-imageInput?.addEventListener("change", (event) => {
+imageInput.addEventListener("change", (event) => {
   console.log(event.target.files[0]);
   if (imageContent.getElementsByTagName("img").length < 1) {
     image = document.createElement("img");
     image.src = URL.createObjectURL(event.target.files[0]);
+    console.log(image.src);
     image.style.height = "100%";
     image.style.width = "100%";
     image.style.objectFit = "contain";
@@ -34,9 +36,10 @@ imageInput?.addEventListener("change", (event) => {
     imageContent.appendChild(image);
     console.log(imageInput.files[0]);
   } else {
-    let image = document.querySelector("img");
+    image = document.querySelector("img");
     newImage = document.createElement("img");
     newImage.src = URL.createObjectURL(event.target.files[0]);
+    console.log(newImage.src);
     newImage.style.height = "100%";
     newImage.style.width = "100%";
     newImage.style.objectFit = "contain";
@@ -66,6 +69,7 @@ function drop(e) {
   if (imageContent.getElementsByTagName("img").length < 1) {
     image = document.createElement("img");
     image.src = URL.createObjectURL(files[0]);
+    console.log(image.src);
     image.style.height = "100%";
     image.style.width = "100%";
     image.style.objectFit = "contain";
@@ -73,9 +77,10 @@ function drop(e) {
     imageContent.appendChild(image);
     console.log(imageInput.files[0]);
   } else {
-    let image = document.querySelector("img");
+    image = document.querySelector("img");
     newImage = document.createElement("img");
     newImage.src = URL.createObjectURL(files[0]);
+    console.log(newImage.src);
     newImage.style.height = "100%";
     newImage.style.width = "100%";
     newImage.style.objectFit = "contain";
@@ -86,25 +91,62 @@ function drop(e) {
 }
 console.log(imageContent.getElementsByTagName("img").length);
 
+let predictWord = document.querySelector(".word");
+let predictPercent = document.querySelector(".percent");
+
 let submit = document.querySelector("button.submit");
 submit.addEventListener("click", async (event) => {
-  event.preventDefault();
-  let formData = new FormData();
-  formData.append("image", imageInput.files[0]);
-  await fetch("/upload", {
-    method: "POST",
-    body: formData,
-  });
-  console.log("Sending image...");
-});
+  console.log(predictWord);
+  console.log(predictPercent);
+  if (!imageInput.files[0]) {
+    return;
+  } else {
+    event.preventDefault();
+    let formData = new FormData();
+    formData.append("image", imageInput.files[0]);
+    let response = await fetch("/upload", {
+      method: "POST",
+      body: formData,
+    });
+    console.log("Sending image...");
+    let res = await response.json();
+    console.log(res);
 
-let content = document.querySelector(".result-content");
+    if (predictWord == null || predictPercent == null) {
+      predictWord = document.createElement("p");
+      predictWord.classList.add("word");
+      predictPercent = document.createElement("p");
+      predictPercent.classList.add("percent");
+
+      predictWord.textContent = "Prediction Word : " + res["Predicted Word"];
+      predictPercent.textContent = "Percentage : " + res["Confidence"];
+
+      content.appendChild(predictWord);
+      content.appendChild(predictPercent);
+    } else {
+      content.removeChild(predictWord);
+      content.removeChild(predictPercent);
+
+      predictWord = document.createElement("p");
+      predictWord.classList.add("word");
+      predictPercent = document.createElement("p");
+      predictPercent.classList.add("percent");
+
+      predictWord.textContent = "Prediction Word : " + res["Predicted Word"];
+      predictPercent.textContent = "Percentage : " + res["Confidence"];
+
+      content.appendChild(predictWord);
+      content.appendChild(predictPercent);
+    }
+  }
+});
 
 // let response = fetch("/post");
 // response.then((res) => {
 //   console.log(res);
 // });
 
+//--------------upload file and camera switch button-----------------
 let fileButton = document.querySelector(".file");
 let camButton = document.querySelector(".cam");
 
