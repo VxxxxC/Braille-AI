@@ -8,6 +8,7 @@ import fetch from 'node-fetch';
 import formidable from 'formidable';
 // import knex from 'knex';
 import fs from "fs"
+import path from 'path'
 
 const app = express();
 const PORT = env.PORT;
@@ -125,3 +126,5 @@ app.post('/upload', async (req, res) => {
 // app.get('/post', async (req, res) => {
 
 // })
+
+
