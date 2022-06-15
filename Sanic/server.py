@@ -78,6 +78,9 @@ def braille_api(request):
     return json({"Predicted Word": alphabet, "Confidence": confidence})
 
 
+
+
+
 # app.run must be at the bottom , otherwise cannot start the server
 if __name__ == "__main__":
     app.run(host="localhost", port=5000, dev=True, debug=True)
