@@ -16,7 +16,7 @@ variables:
     services:
       - postgres:latest
     before_script:
-      - cd Tecky_C20TW_BAD_Project/express
+      - cd Tecky_C20TW_BAD_Project
       - yarn install
       - yarn knex migrate:latest --env test
     stage: testing
