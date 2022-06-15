@@ -149,15 +149,22 @@ submit.addEventListener("click", async (event) => {
 //--------------upload file and camera switch button-----------------
 let fileButton = document.querySelector(".file");
 let camButton = document.querySelector(".cam");
+let arrow = document.querySelector(".indicator");
+let leftBox = document.querySelector(".left-container");
+let rightBox = document.querySelector(".right-container");
 
 fileButton.addEventListener("click", () => {
   cameraContent.style.display = "none";
   imageContent.style.display = "inline-block";
   submit.style.display = "inline-block";
+  arrow.style.display = "inline";
+  rightBox.style.display = "flex";
 });
 
 camButton.addEventListener("click", () => {
   cameraContent.style.display = "inline-block";
   imageContent.style.display = "none";
   submit.style.display = "none";
+  arrow.style.display = "none";
+  rightBox.style.display = "none";
 });

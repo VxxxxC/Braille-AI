@@ -49,6 +49,9 @@ body {
     rgba(0, 64, 128, 0.25),
     rgba(0, 64, 128, 0.85)
   );
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .image-display-block {
@@ -137,6 +140,7 @@ input {
 }
 
 .indicator {
+  display: inline;
   position: relative;
   top: 0;
   left: 0;
