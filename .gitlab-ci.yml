@@ -1,56 +1,71 @@
-image: node:latest
-
 stages:
-  - testing
-  - build
-  - deploy
+  - docker
+services:
+  - docker:dind
+docker-job:
+ stage: docker
+ image: docker
+ script:
+  - echo docker login registry.gitlab.com
+  - docker build -t registry.gitlab.com/vxxxxc/tecky_c20tw_bad_project .
+  - docker push registry.gitlab.com/vxxxxc/tecky_c20tw_bad_project
+
+
+
+
+# image: node:latest
+
+# stages:
+#   - testing
+#   - build
+#   - deploy
   
 
-variables:
-  POSTGRES_DB: braille
-  POSTGRES_USER: CICD
-  POSTGRES_PASSWORD: CICD
-  POSTGRES_HOST: postgres
+# variables:
+#   POSTGRES_DB: braille
+#   POSTGRES_USER: CICD
+#   POSTGRES_PASSWORD: CICD
+#   POSTGRES_HOST: postgres
 
-  testing:
-    services:
-      - postgres:latest
-    before_script:
-      - cd Tecky_C20TW_BAD_Project
-      - yarn install
-      - yarn knex migrate:latest --env test
-    stage: testing
-    script:
-      - yarn jest
+#   testing:
+#     services:
+#       - postgres:latest
+#     before_script:
+#       - cd Tecky_C20TW_BAD_Project/express
+#       - yarn install
+#       - yarn knex migrate:latest --env test
+#     stage: testing
+#     script:
+#       - yarn jest
 
 
-  #  build:
-  #   dependenies:
-  #     - test
-  #    before_script:
-  #      - cd Tecky_C20TW_BAD_Project/express  
-  #   stage: build
-  #   script:
-  #     - yarn init
-  #     - yarn run build
+#    build:
+#     dependenies:
+#       - test
+#      before_script:
+#        - cd Tecky_C20TW_BAD_Project/express  
+#     stage: build
+#     script:
+#       - yarn init
+#       - yarn run build
 
-  # deploy:
-  # dependenies:
-  #     - build
-  #   before_script:
-  #     - "which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )"
-  #     - eval $(ssh-agent -s)
-  #     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > private.pem
-  #     - chmod 400 private.pem
-  #     - ssh-add private.pem > /dev/null
-  #     - mkdir -p ~/.ssh
-  #     - chmod 700 ~/.ssh
-  #     - ssh-keyscan -H  vxxxxc > ~/.ssh/known_hosts
-  #     - chmod 644 ~/.ssh/known_hosts
-  #   stage: deploy
-  #   script:
-  #     - ssh ubuntu@vxxxxc
-  #       "cd Tecky_C20TW_BAD_Project;
-  #       git pull origin main;
-  #       yarn install;
-  #       yarn knex migrate:latest;"
+#   deploy:
+#   dependenies:
+#       - build
+#     before_script:
+#       - "which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )"
+#       - eval $(ssh-agent -s)
+#       - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > private.pem
+#       - chmod 400 private.pem
+#       - ssh-add private.pem > /dev/null
+#       - mkdir -p ~/.ssh
+#       - chmod 700 ~/.ssh
+#       - ssh-keyscan -H  vxxxxc > ~/.ssh/known_hosts
+#       - chmod 644 ~/.ssh/known_hosts
+#     stage: deploy
+#     script:
+#       - ssh ubuntu@vxxxxc
+#         "cd Tecky_C20TW_BAD_Project;
+#         git pull origin main;
+#         yarn install;
+#         yarn knex migrate:latest;"
