@@ -10,6 +10,8 @@ import formidable from 'formidable';
 import fs from "fs"
 
 
+
+
 const app = express();
 const PORT = env.PORT;
 
@@ -107,18 +109,27 @@ app.post('/upload', async (req, res) => {
         //         uploaded_date: "now()"
         //     })
         //     .returning("id")
-        //     .then((res) => {
+        //     .then((res: any) => {
         //         let result = res
         //         let id = result[0].id
         //         console.log(`image ID is : ${id}`)
         //     })
 
 
-        let response = await fetch('http://localhost:5000/api', {
+        let toSanic = await fetch('http://localhost:5000/api', {
             method: 'POST',
             body: JSON.stringify(submitImage)
         })
-        let result = await response.json()
+        let result = await toSanic.json()
+        console.log(result)
+
+        // let predictResult = result;
+
+        // let toFrontend = await fetch('/', {
+        //     method: 'POST',
+        //     body: JSON.stringify(predictResult)
+        // })
+        // let res = await toFrontend.json()
         res.json(result)
     })
 })
