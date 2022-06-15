@@ -5,7 +5,7 @@ services:
 docker-job:
  stage: docker
  image: docker:dind
- scripts:
+ script:
   - docker build .
 
 
