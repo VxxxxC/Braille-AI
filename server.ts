@@ -1,14 +1,14 @@
 import express from "express"
-import { env } from './env'
+import { env } from './Express/env'
 import { print } from 'listening-on'
-import { client } from './db'
+import { client } from './Express/db'
 import http from 'http'
 import { Server as ServerIO } from 'socket.io';
 import fetch from 'node-fetch';
 import formidable from 'formidable';
 // import knex from 'knex';
 import fs from "fs"
-import path from 'path'
+
 
 const app = express();
 const PORT = env.PORT;
