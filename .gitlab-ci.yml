@@ -2,7 +2,7 @@ image: node:16.15.0-slim
 
 stages:
   - testing
-  - build
+  # - build
   - deploy
 
 variables:
@@ -24,15 +24,15 @@ testing:
   script:
     - npm test
 
-build:
-  # dependencies:
-  #   - testing
-  before_script:
-    - cd Express
-    - yarn add typescript
-  stage: build
-  script:
-    - npm run build
+# build:
+#   # dependencies:
+#   #   - testing
+#   before_script:
+#     - cd Express
+#     - yarn add typescript
+#   stage: build
+#   script:
+#     - npm run build
 
 deploy:
   dependencies:
