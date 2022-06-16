@@ -1,7 +1,7 @@
 image: node:16.15.0-slim
 
 stages:
-  # - testing
+  - testing
   - build
   - deploy
 
@@ -16,26 +16,37 @@ variables:
   WEB_SERVER_ROOT: Express
   WEB_SERVER_NAME: Braille
 
-# testing:
-#   services:
-#     - postgres:latest
+testing:
+  services:
+    - postgres:14.3-alpine
 
-#   before_script:
-#     - cd Express
-#     - npm i -g pnpm
-#     - pnpm i
+  artifacts:
+    paths:
+      - $WEB_SERVER_ROOT/node_modules
 
-#   stage: testing
-#   script:
-#     - npm test
+  before_script:
+    - cd Express
+    - npm i -g pnpm
+    - pnpm i
+
+  stage: testing
+  script:
+    - npm test
 
 build:
+  stage: build
   # dependencies:
   #   - testing
+
+  artifacts:
+    paths:
+      - $WEB_SERVER_ROOT/dist
+
   before_script:
     - cd Express
     - yarn install
-  stage: build
+    - cd $WEB_SERVER_ROOT
+
   script:
     - npm run build
 
@@ -45,6 +56,7 @@ deploy:
 
   # dependencies:
   #   - testing
+
   before_script:
     - apt update
     - apt install --yes rsync openssh-client
