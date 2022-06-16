@@ -43,7 +43,6 @@ build:
       - $WEB_SERVER_ROOT/dist
 
   before_script:
-    - cd Express
     - npm install
     - cd $WEB_SERVER_ROOT
 
