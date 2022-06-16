@@ -46,10 +46,15 @@ server.listen(PORT, () => {
     (0, listening_on_1.print)(PORT);
 });
 //------------Formidable-------------------
-const uploadDir = 'upload';
+let uploadDir = 'upload';
+let publicDir = 'public';
+if (!fs_1.default.existsSync(publicDir)) {
+    publicDir = "../public";
+    uploadDir = '../upload';
+}
 fs_1.default.mkdirSync(uploadDir, { recursive: true });
 //------------Express Application-------------
-app.use(express_1.default.static("public"));
+app.use(express_1.default.static(publicDir));
 app.use('/image', express_1.default.static(uploadDir));
 app.use(express_1.default.json());
 //***************** BELOW IS EXPRESS ROUTE ****************************/

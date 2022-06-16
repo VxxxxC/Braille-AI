@@ -45,12 +45,17 @@ server.listen(PORT, () => {
 
 
 //------------Formidable-------------------
-const uploadDir = 'upload';
+  let uploadDir = 'upload';
+  let publicDir = 'public';
+  if (!fs.existsSync(publicDir)){
+      publicDir = "../public"
+      uploadDir = '../upload'
+  }
 fs.mkdirSync(uploadDir, { recursive: true })
 
 
 //------------Express Application-------------
-app.use(express.static("public"));
+app.use(express.static(publicDir));
 app.use('/image', express.static(uploadDir))
 app.use(express.json());
 
