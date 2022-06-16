@@ -1,31 +1,50 @@
 image: node:16.15.0-slim
 
 stages:
-  - test
+  - testing
   - deploy
-
 variables:
   POSTGRES_DB: "braille"
   POSTGRES_USER: "postgres"
   POSTGRES_PASSWORD: "postgres"
   POSTGRES_HOST: "postgres"
 
-  test:
+  testing:
     services:
-      - postgres:14.3 -alpine
+      - 'postgres:latest'
     before_script:
       - cd Tecky_C20TW_BAD_Project/Express
       - npm i -g pnpm
       - pnpm i
-    stage: test
+    stage: testing
     script:
       - npm test
-
-build:
-  stage: build
-  dependencies:
-    - test
-  before_script:
-    - cd Tecky_C20TW_BAD_Project/Express
-  script:
-    - npm run build
+  build:
+    dependenies:
+      - test
+    before_script:
+      - cd Tecky_C20TW_BAD_Project/express
+    stage: build
+    script:
+      - npm run build
+  deploy:
+    dependenies:
+      - build
+    before_script:
+      - apt update
+      - apt install --yes git openssh-client
+      - mkdir -p ~/.ssh
+      - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+      - chmod 600 ~/.ssh/id_rsa
+      - ssh -keyscan
+      - cd Tecky_C20TW_BAD_Project
+    stage: deploy
+    only:
+      - production
+    image:
+      - 'ububtu:22.04'
+    script:
+      - echo "commit_hash = $CI-COMMIT_SHA"
+      - ssh server " source -/.nvm/nvm.sh &&\ cd ~/Tecky_C20TW_BAD_Project &&\
+        git fetch &&\ pnpm i -- prod &&\ cd Tecky_C20TW_BAD_Project/express &&\
+        yarn knex migrate:latest &&\ forever restart server.ts;"
