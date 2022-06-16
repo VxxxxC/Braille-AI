@@ -25,7 +25,7 @@ testing:
 
 build:
   dependencies:
-    - test
+    - testing
   before_script:
     - cd Tecky_C20TW_BAD_Project/express
   stage: build
