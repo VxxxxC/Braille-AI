@@ -1,7 +1,7 @@
 image: node:16.15.0-slim
 
 stages:
-  - testing
+  # - testing
   # - build
   - deploy
 
@@ -10,6 +10,9 @@ variables:
   POSTGRES_USER: postgres
   POSTGRES_PASSWORD: postgres
   POSTGRES_HOST: postgres
+  SERVER_HOST: 18.213.102.175
+  SERVER_NAME: vxxxxc
+  PROJECT_ROOT: ~/tecky_c20tw_bad_project
 
 testing:
   services:
@@ -24,17 +27,20 @@ testing:
   script:
     - npm test
 
-# build:
-#   # dependencies:
-#   #   - testing
-#   before_script:
-#     - cd Express
-#     - yarn add typescript
-#   stage: build
-#   script:
-#     - npm run build
+build:
+  # dependencies:
+  #   - testing
+  before_script:
+    - cd Express
+    - yarn add typescript
+  stage: build
+  script:
+    - npm run build
 
 deploy:
+  stage: deploy
+  image: ubuntu:22.04
+
   dependencies:
     - testing
   before_script:
@@ -43,12 +49,8 @@ deploy:
     - mkdir -p ~/.ssh
     - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
     - chmod 600 ~/.ssh/id_rsa
-    - ssh -keyscan
+    - ssh -keyscan -H  vxxxxc > ~/.ssh/known_hosts
     - cd Tecky_C20TW_BAD_Project
-
-  stage: deploy
-
-  image: ubuntu:22.04
 
   script:
     - echo "Hi~"
