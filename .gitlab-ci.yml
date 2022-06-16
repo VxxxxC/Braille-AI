@@ -13,7 +13,7 @@ variables:
   SERVER_HOST: 18.213.102.175
   SERVER_USER: ubuntu
   PROJECT_ROOT: ~/tecky_c20tw_bad_project
-  WEB_SERVER_ROOT: ~/tecky_c20tw_bad_project/Express
+  WEB_SERVER_ROOT: Express
   WEB_SERVER_NAME: Braille
 
 testing:
@@ -35,8 +35,8 @@ testing:
 
 build:
   stage: build
-  # dependencies:
-  #   - testing
+  dependencies:
+    - testing
 
   artifacts:
     paths:
@@ -44,7 +44,7 @@ build:
 
   before_script:
     - cd Express
-    - yarn install
+    - npm install
     - cd $WEB_SERVER_ROOT
 
   script:
@@ -54,8 +54,8 @@ deploy:
   stage: deploy
   image: ubuntu:22.04
 
-  # dependencies:
-  #   - testing
+  dependencies:
+    - testing
 
   before_script:
     - apt update
