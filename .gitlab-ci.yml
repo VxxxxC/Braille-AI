@@ -13,7 +13,7 @@ variables:
   SERVER_HOST: 18.213.102.175
   SERVER_USER: ubuntu
   PROJECT_ROOT: ~/tecky_c20tw_bad_project
-  WEB_SERVER_ROOT: Express
+  WEB_SERVER_ROOT: /Express
   WEB_SERVER_NAME: Braille
 
 testing:
