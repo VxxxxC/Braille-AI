@@ -16,5 +16,5 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false
   },
-  "exclude": ["node_modules", "build", "scripts", "index.js"]
+  "exclude": ["public", "node_modules", "build", "scripts", "index.js"]
 }
