@@ -2,7 +2,7 @@ import { config } from "dotenv";
 
 config()
 let mode = process.env.NODE_ENV || 'development'
-const Config = config({ path: mode });
+const Config = config({ path: '.env.' + mode });
 
 if (Config.error) {
   console.log("we got and envconfig error : ", Config.error)
