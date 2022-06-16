@@ -14,7 +14,15 @@
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": false,
+    "outDir": "dist",
     "noUnusedParameters": false
   },
-  "exclude": ["public", "node_modules", "build", "scripts", "index.js"]
+  "exclude": [
+    //
+    "public",
+    "node_modules",
+    "dist",
+    "scripts",
+    "index.js"
+  ]
 }
