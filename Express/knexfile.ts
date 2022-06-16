@@ -7,6 +7,7 @@ export const config: { [key: string]: Knex.Config } = {
   development: {
     client: "postgresql",
     connection: {
+      host: env.DB_HOST,
       database: env.DB_NAME,
       user: env.DB_USER,
       password: env.DB_PASSWORD
@@ -18,12 +19,12 @@ export const config: { [key: string]: Knex.Config } = {
     migrations: {
       tableName: "knex_migrations"
     },
-    useNullAsDefault: true
   },
 
   test: {
     client: "postgresql",
     connection: {
+      host: env.DB_HOST,
       database: env.DB_NAME,
       user: env.DB_USER,
       password: env.DB_PASSWORD
@@ -35,12 +36,12 @@ export const config: { [key: string]: Knex.Config } = {
     migrations: {
       tableName: "knex_migrations"
     },
-    useNullAsDefault: true
   },
 
   production: {
     client: "postgresql",
     connection: {
+      host: env.DB_HOST,
       database: env.DB_NAME,
       user: env.DB_USER,
       password: env.DB_PASSWORD
@@ -52,7 +53,6 @@ export const config: { [key: string]: Knex.Config } = {
     migrations: {
       tableName: "knex_migrations"
     },
-    useNullAsDefault: true
   }
 
 };

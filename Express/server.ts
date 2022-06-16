@@ -6,7 +6,7 @@ import http from 'http'
 import { Server as ServerIO } from 'socket.io';
 import fetch from 'node-fetch';
 import formidable from 'formidable';
-// import knex from 'knex';
+// import * as Knex from 'knex';
 import fs from "fs"
 
 
