@@ -2,7 +2,7 @@ image: node:16.15.0-slim
 
 stages:
   # - testing
-  # - build
+  - build
   - deploy
 
 variables:
@@ -15,7 +15,6 @@ variables:
   PROJECT_ROOT: ~/tecky_c20tw_bad_project
   WEB_SERVER_ROOT: Express
   WEB_SERVER_NAME: Braille
-
 
 # testing:
 #   services:
@@ -30,15 +29,15 @@ variables:
 #   script:
 #     - npm test
 
-# build:
-#   # dependencies:
-#   #   - testing
-#   before_script:
-#     - cd Express
-#     - yarn add typescript
-#   stage: build
-#   script:
-#     - npm run build
+build:
+  # dependencies:
+  #   - testing
+  before_script:
+    - cd Express
+    - yarn install
+  stage: build
+  script:
+    - npm run build
 
 deploy:
   stage: deploy
@@ -59,7 +58,5 @@ deploy:
     - echo "  IdentityFile ~/.ssh/id_rsa " >> ~/.ssh/config
     - cd $WEB_SERVER_ROOT
 
-
   script:
-
     - ssh server "echo Hi"
