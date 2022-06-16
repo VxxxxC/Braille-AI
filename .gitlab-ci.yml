@@ -6,7 +6,7 @@ stages:
   - deploy
 
 variables:
-  POSTGRES_DB: braille
+  POSTGRES_DB: bad009-test
   POSTGRES_USER: postgres
   POSTGRES_PASSWORD: postgres
   POSTGRES_HOST: postgres
@@ -45,8 +45,8 @@ variables:
     stage: deploy
     only:
       - production
-    # image:
-    #   - ubuntu:22.04
+    image:
+      - ubuntu:22.04
     script:
       - echo "commit_hash = $CI-COMMIT_SHA"
       - ssh server " source -/.nvm/nvm.sh &&\ cd ~/Tecky_C20TW_BAD_Project &&\
