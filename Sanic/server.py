@@ -43,7 +43,7 @@ def braille_api(request):
     path_list = os.listdir(root)
     print('dir list at root',path_list)
 
-    express_dir = os.path.join(root,'/Express/upload')
+    express_dir = os.path.join(root,'Express/upload')
     print('imaeg print',express_dir)
 
     image = os.path.join(express_dir, res)
