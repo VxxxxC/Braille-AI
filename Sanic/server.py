@@ -32,9 +32,7 @@ def braille_api(request):
     print(model)
     print('load model ok..')
 
-
-    print("当前工作目录 : %s" % os.getcwd())
-    image_path = '../Sanic/uploads'
+    image_path = os.chdir('../Express/upload')
     image = os.path.join(image_path, res)
     print(image)
 
