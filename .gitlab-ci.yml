@@ -1,10 +1,10 @@
-image: node:latest
+image: node:16.15.0-slim
 
 stages:
   - testing
 
 variables:
-  POSTGRES_DB: bad009-test
+  POSTGRES_DB: braille
   POSTGRES_USER: postgres
   POSTGRES_PASSWORD: postgres
   POSTGRES_HOST: postgres
