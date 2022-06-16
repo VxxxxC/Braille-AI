@@ -29,6 +29,7 @@ build:
   #   - testing
   before_script:
     - cd Express
+    - yarn add typescript
   stage: build
   script:
     - npm run build
@@ -49,6 +50,8 @@ deploy:
 
   only:
     - production
+
+  image: ubuntu:22.04
 
   script:
     - echo "Hi~"
