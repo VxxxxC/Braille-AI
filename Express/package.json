@@ -6,7 +6,8 @@
   "scripts": {
     "start": "ts-node-dev server.ts",
     "dev": "ts-node-dev server.ts",
-    "test": "jest"
+    "test": "jest --runInBand --forceExit",
+    "build": "tsc -p ."
   },
   "keywords": [],
   "author": "",
