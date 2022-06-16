@@ -9,3 +9,4 @@ tensorflow/
 upload/
 images/
 venv/
+Sanic/server/

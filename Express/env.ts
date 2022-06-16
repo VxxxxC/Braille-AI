@@ -18,6 +18,7 @@ export let env: any = {
   PORT: 8000,
   DB_HOST: 'localhost',
   NODE_ENV: 'development',
+  ...Config
 }
 
 if (process.env.NODE_ENV === 'test') {

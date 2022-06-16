@@ -13,7 +13,7 @@ import fs from "fs"
 
 
 const app = express();
-const PORT = env.PORT;
+const PORT = +env.PORT;
 
 client.connect(err => {
     if (err) {
