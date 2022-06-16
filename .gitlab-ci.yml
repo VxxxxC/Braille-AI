@@ -36,7 +36,7 @@ testing:
 
 deploy:
   dependencies:
-    - build
+    - testing
   before_script:
     - apt update
     - apt install --yes git openssh-client
