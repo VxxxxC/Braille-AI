@@ -1,4 +1,4 @@
-image: node:latest
+image: node:16.15.0-slim
 
 stages:
   - testing
@@ -13,10 +13,7 @@ variables:
 
   testing:
     services:
-      - postgres:latest
-     artifacts:
-      path:
-       - cd Tecky_C20TW_BAD_Project/node_models
+      - postgres:14.3 -alpine
     before_script:
       - cd Tecky_C20TW_BAD_Project/Express
       - npm i -g pnpm
