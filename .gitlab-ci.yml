@@ -83,26 +83,34 @@
 # build:
 #   stage: build
 
-# image: node:16.15.0-slim
+image: node:16.15.0-slim
 
-# stages:
-#   - testing
-#   - deploy
+stages:
+  - test
+  - deploy
 
-# variables:
-#   POSTGRES_DB: braille
-#   POSTGRES_USER: CICD
-#   POSTGRES_PASSWORD: CICD
-#   POSTGRES_HOST: postgres
+variables:
+  POSTGRES_DB: braille
+  POSTGRES_USER: CICD
+  POSTGRES_PASSWORD: CICD
+  POSTGRES_HOST: postgres
 
-#   testing:
-#     services:
-#       - postgres:14.3 -alpine
-#     before_script:
-#       - cd Tecky_C20TW_BAD_Project/Express
-#       - npm i -g pnpm
-#       - pnpm i
-#     stage: testing
-#     script:
-#       - npm test
+  test:
+    services:
+      - postgres:14.3 -alpine
+    before_script:
+      - cd Tecky_C20TW_BAD_Project/Express
+      - npm i -g pnpm
+      - pnpm i
+    stage: test
+    script:
+      - npm test
 
+build:
+  stage: build
+  dependencies:
+    - test
+  before_script:
+    - cd Tecky_C20TW_BAD_Project/Express
+  script:
+    - npm run build
