@@ -4,100 +4,22 @@ stages:
   - testing
   # - build
   - deploy
+  
 
 variables:
   POSTGRES_DB: braille
   POSTGRES_USER: CICD
   POSTGRES_PASSWORD: CICD
   POSTGRES_HOST: postgres
+  SERVER_HOST:
+  SERVER_USER:
 
   testing:
     services:
       - postgres:latest
-    before_script:
-      - cd Tecky_C20TW_BAD_Project/Express
-      - yarn install
-      - yarn knex migrate:latest --env test
-    stage: testing
-    script:
-      - yarn knex seed:run test
-
-  #  build:
-  #   dependenies:
-  #     - test
-  #    before_script:
-  #      - cd Tecky_C20TW_BAD_Project/express
-  #   stage: build
-  #   script:
-  #     - yarn init
-  #     - yarn run build
-
-  deploy:
-    before_script:
-      - "which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )"
-      - eval $(ssh-agent -s)
-      - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > private.pem
-      - chmod 400 private.pem
-      - ssh-add private.pem > /dev/null
-      - mkdir -p ~/.ssh
-      - chmod 700 ~/.ssh
-      - ssh-keyscan -H  vxxxxc > ~/.ssh/known_hosts
-      - chmod 644 ~/.ssh/known_hosts
-    stage: deploy
-    only:
-     - production
-    script:
-      - ssh ubuntu@vxxxxc
-        "cd Tecky_C20TW_BAD_Project;
-        git pull origin main;
-        yarn install;
-        yarn knex migrate:latest -- env production;
-        forever restart index.js;"
-
-Beeno Version :
-
-image: node: 16.15.0-slim
-
-stage:
-  - test
-  - build
-  - deploy
-
-variables:
-  POSTGRES_DB: braille
-  POSTGRES_USER: CICD
-  POSTGRES_PASSWORD: CICD
-  POSTGRES_HOST: postgres
-
-test:
-  stage: test
-  services:
-    - postgres: 14.3-alpine
-  before_script:
-    - cd Tecky_C20TW_BAD_Project
-    - npm i -g pnpm
-    - pnpm i
-  script:
-    - npm test
-
-build:
-  stage: build
-
-image: node:16.15.0-slim
-
-stages:
-  - testing
-  - deploy
-
-variables:
-  POSTGRES_DB: braille
-  POSTGRES_USER: CICD
-  POSTGRES_PASSWORD: CICD
-  POSTGRES_HOST: postgres
-
-  testing:
-    services:
-      - postgres:14.3 -alpine
+     artifacts:
+      path:
+       - cd Tecky_C20TW_BAD_Project/node_modules
     before_script:
       - cd Tecky_C20TW_BAD_Project/Express
       - npm i -g pnpm
@@ -106,3 +28,38 @@ variables:
     script:
       - npm test
 
+   build:
+    dependenies:
+      - test
+     before_script:
+      - cd Tecky_C20TW_BAD_Project/express  
+    stage: build
+    script:
+      - npm run build
+
+  deploy:
+    dependenies:
+       - build
+    before_script:
+    - apt update
+    - apt install --yes git openssh-client
+    - mkdir -p ~/.ssh
+    - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - ssh -keyscan
+    - cd Tecky_C20TW_BAD_Project
+    stage: deploy
+    only:
+     - production
+    image:
+    - ububtu:22.04
+    script:
+      - echo "commit_hash = $CI-COMMIT_SHA"
+      - ssh server "
+        source -/.nvm/nvm.sh &&\
+        cd ~/Tecky_C20TW_BAD_Project &&\
+        git fetch &&\
+        pnpm i -- prod &&\
+        cd Tecky_C20TW_BAD_Project/express &&\
+        yarn knex migrate:latest &&\
+        forever restart server.ts;" 
