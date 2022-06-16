@@ -32,7 +32,7 @@ def braille_api(request):
     print(model)
     print('load model ok..')
 
-    image_path = '/Users/veperho/Desktop/Tecky_BAD_Project/Express/upload'
+    image_path = '../Express/upload'
     image = os.path.join(image_path, res)
     print(image)
 
