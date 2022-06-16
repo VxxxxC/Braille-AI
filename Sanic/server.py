@@ -34,7 +34,8 @@ def braille_api(request):
 
     image_path = '../Sanic/uploads'
     image = os.path.join(image_path, res)
-    print(image)
+    print("当前工作目录 : %s" % os.getcwd())
+    # print(image)
 
 # %%
     class_names = [
