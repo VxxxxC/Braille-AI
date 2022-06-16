@@ -50,8 +50,5 @@ deploy:
   only:
     - production
 
-  image:
-    - ubuntu:22.04
-
   script:
     - echo "Hi~"
