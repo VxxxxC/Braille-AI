@@ -3,6 +3,7 @@ image: node:16.15.0-slim
 stages:
   - testing
   - build
+  - deploy
 
 variables:
   POSTGRES_DB: braille
@@ -43,7 +44,9 @@ deploy:
     - chmod 600 ~/.ssh/id_rsa
     - ssh -keyscan
     - cd Tecky_C20TW_BAD_Project
+
   stage: deploy
+
   only:
     - production
 
