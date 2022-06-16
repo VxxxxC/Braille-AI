@@ -4,14 +4,14 @@ stages:
   - testing
   - deploy
 variables:
-  POSTGRES_DB: "braille"
-  POSTGRES_USER: "postgres"
-  POSTGRES_PASSWORD: "postgres"
-  POSTGRES_HOST: "postgres"
+  POSTGRES_DB: braille
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: postgres
+  POSTGRES_HOST: postgres
 
   testing:
     services:
-      - 'postgres:latest'
+      - postgres:latest
     before_script:
       - cd Tecky_C20TW_BAD_Project/Express
       - npm i -g pnpm
@@ -19,6 +19,7 @@ variables:
     stage: testing
     script:
       - npm test
+
   build:
     dependenies:
       - test
@@ -27,6 +28,7 @@ variables:
     stage: build
     script:
       - npm run build
+
   deploy:
     dependenies:
       - build
@@ -42,7 +44,7 @@ variables:
     only:
       - production
     image:
-      - 'ububtu:22.04'
+      - ububtu:22.04
     script:
       - echo "commit_hash = $CI-COMMIT_SHA"
       - ssh server " source -/.nvm/nvm.sh &&\ cd ~/Tecky_C20TW_BAD_Project &&\
