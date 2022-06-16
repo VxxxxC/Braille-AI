@@ -43,9 +43,8 @@ build:
       - $WEB_SERVER_ROOT/dist
 
   before_script:
-    - cd Express
-    - npm install
     - cd $WEB_SERVER_ROOT
+    - npm install
 
   script:
     - npm run build
@@ -55,7 +54,7 @@ deploy:
   image: ubuntu:22.04
 
   dependencies:
-    - testing
+    - build
 
   before_script:
     - apt update
