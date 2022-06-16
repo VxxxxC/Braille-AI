@@ -11,8 +11,11 @@ variables:
   POSTGRES_PASSWORD: postgres
   POSTGRES_HOST: postgres
   SERVER_HOST: 18.213.102.175
-  SERVER_NAME: vxxxxc
+  SERVER_USER: ubuntu
   PROJECT_ROOT: ~/tecky_c20tw_bad_project
+  WEB_SERVER_ROOT: Express
+  WEB_SERVER_NAME: Braille
+
 
 # testing:
 #   services:
@@ -45,12 +48,18 @@ deploy:
   #   - testing
   before_script:
     - apt update
-    - apt install --yes git openssh-client
+    - apt install --yes rsync openssh-client
     - mkdir -p ~/.ssh
     - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
     - chmod 600 ~/.ssh/id_rsa
-    - ssh-keyscan -H  vxxxxc > ~/.ssh/known_hosts
-    - cd Tecky_C20TW_BAD_Project
+    - ssh-keyscan -H $SERVER_HOST > ~/.ssh/known_hosts
+    - echo "Host server" >> ~/.ssh/config
+    - echo "  Hostname $SERVER_HOST" >> ~/.ssh/config
+    - echo "  User $SERVER_USER" >> ~/.ssh/config
+    - echo "  IdentityFile ~/.ssh/id_rsa " >> ~/.ssh/config
+    - cd $WEB_SERVER_ROOT
+
 
   script:
-    - echo "Hi~"
+
+    - ssh server "echo Hi"
