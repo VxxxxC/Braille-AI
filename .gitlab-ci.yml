@@ -41,8 +41,8 @@ deploy:
   stage: deploy
   image: ubuntu:22.04
 
-  dependencies:
-    - testing
+  # dependencies:
+  #   - testing
   before_script:
     - apt update
     - apt install --yes git openssh-client
