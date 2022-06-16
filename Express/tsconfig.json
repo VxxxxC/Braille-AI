@@ -3,7 +3,7 @@
     "module": "CommonJS",
     "target": "ES6",
     "lib": ["es6", "dom"],
-    "sourceMap": true,
+    "sourceMap": false,
     "allowJs": true,
     "jsx": "react",
     "esModuleInterop": true,

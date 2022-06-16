@@ -59,4 +59,15 @@ deploy:
     - cd $WEB_SERVER_ROOT
 
   script:
-    - ssh server "echo Hi"
+    - rsync -SavLP dist "server:$PROJECT_ROOT/$WEB_SERVER_ROOT"
+    - ssh server "
+      source ~/.nvm/nvm.sh &&
+      cd $PROJECT_ROOT/$WEB_SERVER_ROOT &&
+      git fetch &&
+      git checkout $CI_COMMIT_SHA &&
+      pnpm i --prod &&
+      cd dist &&
+      npx knex migrate:latest &&
+      pm2 start --name $WEB_SERVER_NAME server.js ||
+      pm2 reload $WEB_SERVER_NAME
+      "
