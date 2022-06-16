@@ -35,8 +35,6 @@ testing:
 #     - npm run build
 
 deploy:
-  dependencies:
-    - testing
   before_script:
     - apt update
     - apt install --yes git openssh-client
