@@ -1,7 +1,7 @@
 image: node:16.15.0-slim
 
 stages:
-  # - testing
+  - testing
   - build
   - deploy
 
@@ -11,18 +11,18 @@ variables:
   POSTGRES_PASSWORD: postgres
   POSTGRES_HOST: postgres
 
-# testing:
-#   services:
-#     - postgres:latest
+testing:
+  services:
+    - postgres:latest
 
-#   before_script:
-#     - cd Tecky_C20TW_BAD_Project/Express
-#     - npm i -g pnpm
-#     - pnpm i
+  before_script:
+    - cd Tecky_C20TW_BAD_Project/Express
+    - npm i -g pnpm
+    - pnpm i
 
-#   stage: testing
-#   script:
-#     - echo "hi~"
+  stage: testing
+  script:
+    - npm test
 
 build:
   # dependencies:
@@ -49,6 +49,9 @@ deploy:
 
   only:
     - production
+
+  image:
+    - ubuntu:22.04
 
   script:
     - echo "Hi~"
