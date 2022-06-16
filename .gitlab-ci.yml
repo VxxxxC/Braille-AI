@@ -19,4 +19,4 @@ testing:
 
   stage: testing
   script:
-    - echo "hi~"
+    - npm test
