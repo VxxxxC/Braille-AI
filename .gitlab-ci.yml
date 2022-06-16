@@ -54,7 +54,7 @@ deploy:
   image: ubuntu:22.04
 
   dependencies:
-    - testing
+    - build
 
   before_script:
     - apt update
