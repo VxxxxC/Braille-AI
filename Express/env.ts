@@ -15,7 +15,7 @@ export let env: any = {
   DB_USER: process.env.DB_USER,
   DB_PASSWORD: process.env.DB_PASSWORD,
   SESSION_SECRET: 'Braille',  // FIXME: 暫時hardcoded
-  PORT: 8000,
+  PORT: 8100,
   DB_HOST: 'localhost',
   NODE_ENV: 'development',
   ...Config
