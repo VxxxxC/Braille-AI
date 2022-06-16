@@ -14,6 +14,7 @@ testing:
     - postgres:latest
 
   before_script:
+    - cd Tecky_C20TW_BAD_Project/Express
     - npm i -g pnpm
     - pnpm i
 
