@@ -14,28 +14,28 @@ variables:
   SERVER_NAME: vxxxxc
   PROJECT_ROOT: ~/tecky_c20tw_bad_project
 
-testing:
-  services:
-    - postgres:latest
+# testing:
+#   services:
+#     - postgres:latest
 
-  before_script:
-    - cd Express
-    - npm i -g pnpm
-    - pnpm i
+#   before_script:
+#     - cd Express
+#     - npm i -g pnpm
+#     - pnpm i
 
-  stage: testing
-  script:
-    - npm test
+#   stage: testing
+#   script:
+#     - npm test
 
-build:
-  # dependencies:
-  #   - testing
-  before_script:
-    - cd Express
-    - yarn add typescript
-  stage: build
-  script:
-    - npm run build
+# build:
+#   # dependencies:
+#   #   - testing
+#   before_script:
+#     - cd Express
+#     - yarn add typescript
+#   stage: build
+#   script:
+#     - npm run build
 
 deploy:
   stage: deploy
