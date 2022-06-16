@@ -23,7 +23,7 @@ const formidable_1 = __importDefault(require("formidable"));
 // import * as Knex from 'knex';
 const fs_1 = __importDefault(require("fs"));
 const app = (0, express_1.default)();
-const PORT = env_1.env.PORT;
+const PORT = +env_1.env.PORT;
 db_1.client.connect(err => {
     if (err) {
         console.error(`database connection error : ${err}`);
