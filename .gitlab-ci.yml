@@ -31,3 +31,25 @@ build:
   stage: build
   script:
     - npm run build
+
+deploy:
+  dependencies:
+    - build
+  before_script:
+    - apt update
+    - apt install --yes git openssh-client
+    - mkdir -p ~/.ssh
+    - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - ssh -keyscan
+    - cd Tecky_C20TW_BAD_Project
+  stage: deploy
+  only:
+    - production
+  image:
+    - ubuntu:22.04
+  script:
+    - echo "commit_hash = $CI-COMMIT_SHA"
+    - ssh server " source -/.nvm/nvm.sh &&\ cd ~/Tecky_C20TW_BAD_Project &&\
+      git fetch &&\ pnpm i -- prod &&\ cd Tecky_C20TW_BAD_Project/express &&\
+      yarn knex migrate:latest &&\ forever restart server.ts;"
