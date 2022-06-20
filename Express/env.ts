@@ -15,7 +15,7 @@ export let env: any = {
   DB_USER: process.env.DB_USER,
   DB_PASSWORD: process.env.DB_PASSWORD,
   SESSION_SECRET: 'Braille',  // FIXME: 暫時hardcoded
-  PORT: 8000,
+  PORT: 8010,
   DB_HOST: 'localhost',
   NODE_ENV: 'development',
 }
@@ -25,4 +25,6 @@ if (process.env.NODE_ENV === 'test') {
   env.DB_NAME = process.env.POSTGRES_DB
   env.DB_USER = process.env.POSTGRES_USER
   env.DB_PASSWORD = process.env.POSTGRES_PASSWORD
+
+  console.log(`HOST: ${env.DB_HOST}, DB:${env.DB_NAME}, USER: ${env.DB_USER}, PASSWORD: ${env.DB_PASSWORD}`)
 }

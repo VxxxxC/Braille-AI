@@ -15,5 +15,5 @@ describe('knex migrate test', () => {
    it('should running seed without error', async () => {
       await knex.seed.run();
    })
-   
+
 })
