@@ -23,7 +23,7 @@ const formidable_1 = __importDefault(require("formidable"));
 // import * as Knex from 'knex';
 const fs_1 = __importDefault(require("fs"));
 const app = (0, express_1.default)();
-const PORT = env_1.env.PORT;
+const PORT = +env_1.env.PORT;
 db_1.client.connect(err => {
     if (err) {
         console.error(`database connection error : ${err}`);
@@ -46,10 +46,15 @@ server.listen(PORT, () => {
     (0, listening_on_1.print)(PORT);
 });
 //------------Formidable-------------------
-const uploadDir = 'upload';
+let uploadDir = 'upload';
+let publicDir = 'public';
+if (!fs_1.default.existsSync(publicDir)) {
+    publicDir = "../public";
+    uploadDir = '../upload';
+}
 fs_1.default.mkdirSync(uploadDir, { recursive: true });
 //------------Express Application-------------
-app.use(express_1.default.static("public"));
+app.use(express_1.default.static(publicDir));
 app.use('/image', express_1.default.static(uploadDir));
 app.use(express_1.default.json());
 //***************** BELOW IS EXPRESS ROUTE ****************************/

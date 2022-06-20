@@ -11,3 +11,4 @@ images/
 venv/
 .gitlab-ci.yml
 .idea/
+Sanic/server/

@@ -11,15 +11,7 @@ if (Config.error) {
 else {
     console.log("dotenv config : ", Config);
 }
-exports.env = {
-    DB_NAME: process.env.DB_NAME,
-    DB_USER: process.env.DB_USER,
-    DB_PASSWORD: process.env.DB_PASSWORD,
-    SESSION_SECRET: 'Braille',
-    PORT: 8000,
-    DB_HOST: 'localhost',
-    NODE_ENV: 'development',
-};
+exports.env = Object.assign({ DB_NAME: process.env.DB_NAME, DB_USER: process.env.DB_USER, DB_PASSWORD: process.env.DB_PASSWORD, SESSION_SECRET: 'Braille', PORT: 8100, DB_HOST: 'localhost', NODE_ENV: 'development' }, Config);
 if (process.env.NODE_ENV === 'test') {
     exports.env.DB_HOST = process.env.POSTGRES_HOST;
     exports.env.DB_NAME = process.env.POSTGRES_DB;
