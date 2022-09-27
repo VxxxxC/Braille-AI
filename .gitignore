@@ -7,8 +7,5 @@ myenv/
 yolov5/
 tensorflow/
 upload/
-images/
-venv/
-.gitlab-ci.yml
 .idea/
-Sanic/server/
+.env.development

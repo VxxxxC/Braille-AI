@@ -11,7 +11,7 @@ variables:
   POSTGRES_PASSWORD: postgres
   POSTGRES_HOST: postgres
   SERVER_HOST: 18.213.102.175
-  SERVER_USER: ubuntu
+  SERVER_USER: bad_project
   PROJECT_ROOT: ~/tecky_c20tw_bad_project
   WEB_SERVER_ROOT: Express
   WEB_SERVER_NAME: Braille
@@ -67,6 +67,9 @@ deploy:
     - echo "  Hostname $SERVER_HOST" >> ~/.ssh/config
     - echo "  User $SERVER_USER" >> ~/.ssh/config
     - echo "  IdentityFile ~/.ssh/id_rsa " >> ~/.ssh/config
+    - cat ~/.ssh/config
+    - pwd
+    - ls -la
     - cd $WEB_SERVER_ROOT
 
   script:
@@ -82,4 +85,3 @@ deploy:
       pm2 start --name $WEB_SERVER_NAME server.js ||
       pm2 reload $WEB_SERVER_NAME
       "
-

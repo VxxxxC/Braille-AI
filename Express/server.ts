@@ -45,12 +45,12 @@ server.listen(PORT, () => {
 
 
 //------------Formidable-------------------
-  let uploadDir = 'upload';
-  let publicDir = 'public';
-  if (!fs.existsSync(publicDir)){
-      publicDir = "../public"
-      uploadDir = '../upload'
-  }
+let uploadDir = 'upload';
+let publicDir = 'public';
+if (!fs.existsSync(publicDir)) {
+    publicDir = "../public"
+    uploadDir = '../upload'
+}
 fs.mkdirSync(uploadDir, { recursive: true })
 
 
@@ -73,18 +73,18 @@ app.get('/', (req, res) => {
 })
 
 //------------------fetching with Sanic server-----------------
-app.post('/api', async (req, res) => {
-    console.log(req.body)
-    let file = req.body
-    let response = await fetch('http://localhost:5000/api',
-        {
-            method: 'POST',
-            body: JSON.stringify(file)
-        })
-    let result = await response.json()
-    console.log(result)
-    res.json(result)
-})
+// app.post('/api', async (req, res) => {
+//     console.log(req.body)
+//     let file = req.body
+//     let response = await fetch('http://localhost:5010/api',
+//         {
+//             method: 'POST',
+//             body: JSON.stringify(file)
+//         })
+//     let result = await response.json()
+//     console.log(result)
+//     res.json(result)
+// })
 
 app.post('/upload', async (req, res) => {
     // console.log(req)
@@ -121,7 +121,7 @@ app.post('/upload', async (req, res) => {
         //     })
 
 
-        let toSanic = await fetch('http://localhost:5000/api', {
+        let toSanic = await fetch('http://localhost:5010/api', {
             method: 'POST',
             body: JSON.stringify(submitImage)
         })

@@ -1,0 +1,6 @@
+.env
+upload/*
+venv/*
+yolov5/*
+node_modules/*
+myenv/

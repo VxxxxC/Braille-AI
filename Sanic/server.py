@@ -33,21 +33,20 @@ def braille_api(request):
     print(model)
     print('load model ok..')
 
-
     real_path = (os.path.dirname(os.path.realpath(__file__)))
-    print('start point:',real_path)
+    print('start point:', real_path)
 
-    root =os.path.dirname(real_path)
-    print('root is ',root)
+    root = os.path.dirname(real_path)
+    print('root is ', root)
 
     path_list = os.listdir(root)
-    print('dir list at root',path_list)
+    print('dir list at root', path_list)
 
-    express_dir = os.path.join(root,'Express/upload')
-    print('imaeg print',express_dir)
+    express_dir = os.path.join(root, 'Express/upload')
+    print('imaeg print', express_dir)
 
     image = os.path.join(express_dir, res)
-    print('show the',image)
+    print('show the', image)
 
 # %%
     class_names = [
