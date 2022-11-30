@@ -1,6 +1,6 @@
-# Braille-AI
-
-### A braille alphabet regconition AI , developed during Academy 14 days project period:
+###### Academy Project
+#### A trained AI model to recognize alphabet
+---
 
 - Photo insertion
 - Camera Detection
